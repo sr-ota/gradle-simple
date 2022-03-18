@@ -24,7 +24,7 @@ node {
     //}
     
     stage ('Git Clone') {
-        git url: 'https://github.com/sr-ota/gradle-simple', branch: 'main'
+        git url: 'https://github.com/sr-ota/gradle-simple', branch: 'master'
     }
 
     stage ('Exec Gradle') {
