@@ -3,6 +3,10 @@ node {
     def rtGradle = Artifactory.newGradleBuild()
     def buildInfo = Artifactory.newBuildInfo()
 
+    stage ('Git Clone') {
+        git url: 'https://github.com/sr-ota/gradle-simple', branch: 'main'
+    }
+    
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server "jfrogeval"
