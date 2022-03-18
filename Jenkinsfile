@@ -7,7 +7,7 @@ node {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server "jfrogeval"
         rtGradle.tool = "latest"
-        // rtGradle.deployer repo: ARTIFACTORY_LOCAL_SNAPSHOT_REPO, server: server
+        rtGradle.deployer repo: "local-snapshots", server: server
         // rtGradle.resolver repo: ARTIFACTORY_VIRTUAL_RELEASE_REPO, server: server
     }
 
@@ -28,7 +28,7 @@ node {
     }
 
     stage ('Exec Gradle') {
-        rtGradle.run rootDir: ".", tasks: 'clean build', buildInfo: buildInfo
+        rtGradle.run rootDir: ".", tasks: 'clean build jar', buildInfo: buildInfo
     }
 
     stage ('Publish build info') {
