@@ -8,7 +8,7 @@ node {
         server = Artifactory.server "jfrogeval"
         rtGradle.tool = "latest"
         rtGradle.deployer repo: "local-snapshots", server: server
-        // rtGradle.resolver repo: ARTIFACTORY_VIRTUAL_RELEASE_REPO, server: server
+        rtGradle.resolver repo: "gradle-virtual", server: server
     }
 
     stage ('Config Build Info') {
