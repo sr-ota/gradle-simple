@@ -3,10 +3,6 @@ node {
     def rtGradle = Artifactory.newGradleBuild()
     def buildInfo = Artifactory.newBuildInfo()
 
-    stage ('Git Clone') {
-        git url: 'https://github.com/sr-ota/gradle-simple', branch: 'main'
-    }
-    
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server "jfrogeval"
@@ -26,6 +22,10 @@ node {
         // tGradle.usesPlugin = true // Artifactory plugin already defined in build script
         rtGradle.useWrapper = true
     //}
+    
+    stage ('Git Clone') {
+        git url: 'https://github.com/sr-ota/gradle-simple', branch: 'main'
+    }
 
     stage ('Exec Gradle') {
         rtGradle.run rootDir: ".", tasks: 'clean build', buildInfo: buildInfo
